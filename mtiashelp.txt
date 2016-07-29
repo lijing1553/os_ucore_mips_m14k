@@ -1,0 +1,178 @@
+Usage: mips-mti-linux-gnu-as [option...] [asmfile...]
+Options:
+  -a[sub-option...]	  turn on listings
+                      	  Sub-options [default hls]:
+                      	  c      omit false conditionals
+                      	  d      omit debugging directives
+                      	  g      include general info
+                      	  h      include high-level source
+                      	  l      include assembly
+                      	  m      include macro expansions
+                      	  n      omit forms processing
+                      	  s      include symbols
+                      	  =FILE  list to FILE (must be last sub-option)
+  --alternate             initially turn on alternate macro syntax
+  --compress-debug-sections
+                          compress DWARF debug sections using zlib
+  --nocompress-debug-sections
+                          don't compress DWARF debug sections
+  -D                      produce assembler debugging messages
+  --debug-prefix-map OLD=NEW
+                          map OLD to NEW in debug information
+  --defsym SYM=VAL        define symbol SYM to given value
+  --em=[mipsbelf | mipslelf | mipself]
+                          emulate output (default mipsbelf)
+  --execstack             require executable stack for this object
+  --noexecstack           don't require executable stack for this object
+  --size-check=[error|warning]
+			  ELF .size directive check (default --size-check=error)
+  -f                      skip whitespace and comment preprocessing
+  -g --gen-debug          generate debugging information
+  --gstabs                generate STABS debugging information
+  --gstabs+               generate STABS debug info with GNU extensions
+  --gdwarf-2              generate DWARF2 debugging information
+  --gdwarf-sections       generate per-function section names for DWARF line information
+  --hash-size=<value>     set the hash table size close to <value>
+  --help                  show this message and exit
+  --target-help           show target specific options
+  -I DIR                  add DIR to search list for .include directives
+  -J                      don't warn about signed overflow
+  -K                      warn when differences altered for long displacements
+  -L,--keep-locals        keep local symbols (e.g. starting with `L')
+  -M,--mri                assemble in MRI compatibility mode
+  --MD FILE               write dependency information in FILE (default none)
+  -nocpp                  ignored
+  -o OBJFILE              name the object-file output OBJFILE (default a.out)
+  -R                      fold data section into text section
+  --reduce-memory-overheads 
+                          prefer smaller memory use at the cost of longer
+                          assembly times
+  --statistics            print various measured statistics from execution
+  --strip-local-absolute  strip local absolute symbols
+  --traditional-format    Use same format as native assembler when possible
+  --version               print assembler version number and exit
+  -W  --no-warn           suppress warnings
+  --warn                  don't suppress warnings
+  --fatal-warnings        treat warnings as errors
+  --itbl INSTTBL          extend instruction set to include instructions
+                          matching the specifications defined in file INSTTBL
+  -w                      ignored
+  -X                      ignored
+  -Z                      generate object file even after errors
+  --listing-lhs-width     set the width in words of the output data column of
+                          the listing
+  --listing-lhs-width2    set the width in words of the continuation lines
+                          of the output data column; ignored if smaller than
+                          the width of the first line
+  --listing-rhs-width     set the max width in characters of the lines from
+                          the source file
+  --listing-cont-lines    set the maximum number of continuation lines used
+                          for the output data column of the listing
+  @FILE                   read options from FILE
+MIPS options:
+-EB			generate big endian output
+-EL			generate little endian output
+-g, -g2			do not remove unneeded NOPs or swap branches
+-G NUM			allow referencing objects up to NUM bytes
+			implicitly with the gp register [default 8]
+-mips1			generate MIPS ISA I instructions
+-mips2			generate MIPS ISA II instructions
+-mips3			generate MIPS ISA III instructions
+-mips4			generate MIPS ISA IV instructions
+-mips5                  generate MIPS ISA V instructions
+-mips32                 generate MIPS32 ISA instructions
+-mips32r2               generate MIPS32 release 2 ISA instructions
+-mips32r3               generate MIPS32 release 3 ISA instructions
+-mips32r5               generate MIPS32 release 5 ISA instructions
+-mips32r6               generate MIPS32 release 6 ISA instructions
+-mips64                 generate MIPS64 ISA instructions
+-mips64r2               generate MIPS64 release 2 ISA instructions
+-mips64r3               generate MIPS64 release 3 ISA instructions
+-mips64r5               generate MIPS64 release 5 ISA instructions
+-mips64r6               generate MIPS64 release 6 ISA instructions
+-march=CPU/-mtune=CPU	generate code/schedule for CPU, where CPU is one of:
+                        mips1, mips2, mips3, mips4, mips5, mips32, 
+                        mips32r2, mips32r3, mips32r5, mips32r6, mips64, 
+                        mips64r2, mips64r3, mips64r5, mips64r6, r3000, 
+                        r2000, r3900, r6000, r4000, r4010, vr4100, 
+                        vr4111, vr4120, vr4130, vr4181, vr4300, r4400, 
+                        r4600, orion, r4650, r5900, loongson2e, 
+                        loongson2f, r8000, r10000, r12000, r14000, 
+                        r16000, vr5000, vr5400, vr5500, rm5200, rm5230, 
+                        rm5231, rm5261, rm5721, rm7000, rm9000, 4kc, 4km, 
+                        4kp, 4ksc, 4kec, 4kem, 4kep, 4ksd, m4k, m4kp, 
+                        m14k, m14kc, m14ke, m14kec, 24kc, 24kf2_1, 24kf, 
+                        24kf1_1, 24kfx, 24kx, 24kec, 24kef2_1, 24kef, 
+                        24kef1_1, 24kefx, 24kex, 34kc, 34kf2_1, 34kf, 
+                        34kf1_1, 34kfx, 34kx, 34kn, 74kc, 74kf2_1, 74kf, 
+                        74kf1_1, 74kf3_2, 74kfx, 74kx, 1004kc, 1004kf2_1, 
+                        1004kf, 1004kf1_1, interaptiv, m5100, m5101, 
+                        p5600, m6201, 5kc, 5kf, 20kc, 25kf, sb1, sb1a, 
+                        loongson3a, octeon, octeon+, octeon2, xlr, xlp, 
+                        i6400, from-abi
+-mCPU			equivalent to -march=CPU -mtune=CPU. Deprecated.
+-no-mCPU		don't generate code specific to CPU.
+			For -mCPU and -no-mCPU, CPU must be one of:
+                        3900, 4010, 4100, 4650
+-mips16			generate mips16 instructions
+-no-mips16		do not generate mips16 instructions
+-mmicromips		generate microMIPS instructions
+-mno-micromips		do not generate microMIPS instructions
+-msmartmips		generate smartmips instructions
+-mno-smartmips		do not generate smartmips instructions
+-mdsp			generate DSP instructions
+-mno-dsp		do not generate DSP instructions
+-mdspr2			generate DSP R2 instructions
+-mno-dspr2		do not generate DSP R2 instructions
+-mdspr3			generate DSP R3 instructions
+-mno-dspr3		do not generate DSP R3 instructions
+-mmt			generate MT instructions
+-mno-mt			do not generate MT instructions
+-mmcu			generate MCU instructions
+-mno-mcu		do not generate MCU instructions
+-mmsa			generate MSA instructions
+-mno-msa		do not generate MSA instructions
+-mxpa			generate eXtended Physical Address (XPA) instructions
+-mno-xpa		do not generate eXtended Physical Address (XPA) instructions
+-mmxu			generate MXU instructions
+-mno-mxu		do not generate MXU instructions
+-mvirt			generate Virtualization instructions
+-mno-virt		do not generate Virtualization instructions
+-minsn32		only generate 32-bit microMIPS instructions
+-mno-insn32		generate all microMIPS instructions
+-mfix-loongson2f-jump	work around Loongson2F JUMP instructions
+-mfix-loongson2f-nop	work around Loongson2F NOP errata
+-mfix-vr4120		work around certain VR4120 errata
+-mfix-vr4130		work around VR4130 mflo/mfhi errata
+-mfix-24k		insert a nop after ERET and DERET instructions
+-mfix-cn63xxp1		work around CN63XXP1 PREF errata
+-mgp32			use 32-bit GPRs, regardless of the chosen ISA
+-mfp32			use 32-bit FPRs, regardless of the chosen ISA
+-msym32			assume all symbols have 32-bit values
+-O0			remove unneeded NOPs, do not swap branches
+-O			remove unneeded NOPs and swap branches
+--trap, --no-break	trap exception on div by 0 and mult overflow
+--break, --no-trap	break exception on div by 0 and mult overflow
+-mhard-float		allow floating-point instructions
+-msoft-float		do not allow floating-point instructions
+-msingle-float		only allow 32-bit floating-point operations
+-mdouble-float		allow 32-bit and 64-bit floating-point operations
+--[no-]construct-floats	[dis]allow floating point values to be constructed
+--[no-]relax-branch	[dis]allow out-of-range branches to be relaxed
+-mnan=ENCODING		select an IEEE 754 NaN encoding convention, either of:
+                        legacy, 2008
+-KPIC, -call_shared	generate SVR4 position independent code
+-call_nonpic		generate non-PIC code that can operate with DSOs
+-mvxworks-pic		generate VxWorks position independent code
+-non_shared		do not generate code that can operate with DSOs
+-xgot			assume a 32 bit GOT
+-mpdr, -mno-pdr		enable/disable creation of .pdr sections
+-mshared, -mno-shared   disable/enable .cpload optimization for
+                        position dependent (non shared) code
+-mabi=ABI		create ABI conformant object file for:
+                        32, o64, n32, 64, eabi
+-32			create o32 ABI object file (default)
+-n32			create n32 ABI object file
+-64			create 64 ABI object file
+
+Report bugs to <http://imgtec.com/mips-sdk-support/>

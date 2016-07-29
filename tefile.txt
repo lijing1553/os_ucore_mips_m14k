@@ -1,0 +1,300 @@
+mkdir -p /home/oslab/ucore-mips-standard/obj/config
+make CC="/usr/bin/gcc" -C package/config conf
+/usr/bin/gcc -DCURSES_LOC="<ncurses.h>" -DLOCALE -g -O2   conf.o  zconf.tab.o -o conf -lncurses -lcurses
+*
+* uCore Configuration
+*
+*
+* Toolchain setup
+*
+Cross-compiler tool prefix (CROSS_COMPILE) [mips-sde-elf-] mips-sde-elf-
+Additional CFLAGS (ADDITIONAL_CFLAGS) [] 
+Additional LDFLAGS (ADDITIONAL_LDFLAGS) [] 
+*
+* Memory Management
+*
+Support for paging of anonymous memory (swap) (SWAP) [N/y/?] n
+Heap
+> 1. SLAB (HEAP_SLAB) (NEW)
+  2. SLOB (HEAP_SLOB) (NEW)
+choice[1-2]: 1
+*
+* Schedule
+*
+Scheduler
+> 1. Round-Robin (SCHEDULER_RR) (NEW)
+  2. MLFQ (SCHEDULER_MLFQ)
+choice[1-2]: 1
+*
+* Filesystem
+*
+Enable Simple Filesystem(SFS) (HAVE_SFS) [Y/n] y
+  SFS Image size (SFS_IMAGE_SIZE) [4] 4
+  Minimize contents (SFS_MINIMAL_CONTENT) [N/y/?] (NEW) n
+Enable YAFFS2 (HAVE_YAFFS2) [N/y] n
+Enable Fat32 (HAVE_FATFS) [N/y] n
+#
+# configuration written to /home/oslab/ucore-mips-standard/obj/.config
+#
+/usr/bin/gcc -Wall -O2 -D_FILE_OFFSET_BITS=64 -o /home/oslab/ucore-mips-standard/obj/mksfs mksfs.c
+"mips-sde-elf-"gcc -D__ASSEMBLY__ -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o arch/mips/initcode.S
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/dir.o dir.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/file.o file.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/malloc.o malloc.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/panic.o panic.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/signal.o signal.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/spipe.o spipe.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/stdio.o stdio.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/string.o string.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/syscall.o syscall.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/thread.o thread.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.o ulib.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/umain.o umain.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/mod.o mod.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/mount.o mount.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/hash.o common/hash.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/rand.o common/rand.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/printfmt.o common/printfmt.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/string.o common/string.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/syscall.o arch/mips/syscall.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/intr.o arch/mips/intr.c
+"mips-sde-elf-"gcc -D__ASSEMBLY__ -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/clone.o arch/mips/clone.S
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/udivmod.o arch/mips/udivmod.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/udivmodsi4.o arch/mips/udivmodsi4.c
+"mips-sde-elf-"gcc -I. -Icommon -Iarch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/divmod.o arch/mips/divmod.c
+"mips-sde-elf-"ar -cr /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a /home/oslab/ucore-mips-standard/obj/libs-user-ucore/dir.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/file.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/malloc.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/panic.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/signal.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/spipe.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/stdio.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/string.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/syscall.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/thread.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/umain.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/mod.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/mount.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/hash.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/rand.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/printfmt.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/common/string.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/syscall.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/intr.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/clone.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/udivmod.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/udivmodsi4.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/divmod.o
+mkdir -p /home/oslab/ucore-mips-standard/obj/user-ucore/bin
+mkdir -p /home/oslab/ucore-mips-standard/obj/user-ucore/tests
+mkdir -p /home/oslab/ucore-mips-standard/obj/user-ucore/tests/arch/mips
+mkdir -p /home/oslab/ucore-mips-standard/obj/user-ucore/testbin
+"mips-sde-elf-"gcc -I../libs-user-ucore/ -I../libs-user-ucore/common -I../libs-user-ucore/arch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/user-ucore/pwd.o pwd.c
+LINK /home/oslab/ucore-mips-standard/obj/user-ucore/bin/pwd
+"mips-sde-elf-"ld  -static -T ../libs-user-ucore/arch/mips/user.ld /home/oslab/ucore-mips-standard/obj/user-ucore/pwd.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a -o /home/oslab/ucore-mips-standard/obj/user-ucore/bin/pwd
+"mips-sde-elf-"gcc -I../libs-user-ucore/ -I../libs-user-ucore/common -I../libs-user-ucore/arch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/user-ucore/cat.o cat.c
+LINK /home/oslab/ucore-mips-standard/obj/user-ucore/bin/cat
+"mips-sde-elf-"ld  -static -T ../libs-user-ucore/arch/mips/user.ld /home/oslab/ucore-mips-standard/obj/user-ucore/cat.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a -o /home/oslab/ucore-mips-standard/obj/user-ucore/bin/cat
+"mips-sde-elf-"gcc -I../libs-user-ucore/ -I../libs-user-ucore/common -I../libs-user-ucore/arch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/user-ucore/sh.o sh.c
+LINK /home/oslab/ucore-mips-standard/obj/user-ucore/bin/sh
+"mips-sde-elf-"ld  -static -T ../libs-user-ucore/arch/mips/user.ld /home/oslab/ucore-mips-standard/obj/user-ucore/sh.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a -o /home/oslab/ucore-mips-standard/obj/user-ucore/bin/sh
+"mips-sde-elf-"gcc -I../libs-user-ucore/ -I../libs-user-ucore/common -I../libs-user-ucore/arch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/user-ucore/ls.o ls.c
+LINK /home/oslab/ucore-mips-standard/obj/user-ucore/bin/ls
+"mips-sde-elf-"ld  -static -T ../libs-user-ucore/arch/mips/user.ld /home/oslab/ucore-mips-standard/obj/user-ucore/ls.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a -o /home/oslab/ucore-mips-standard/obj/user-ucore/bin/ls
+"mips-sde-elf-"gcc -I../libs-user-ucore/ -I../libs-user-ucore/common -I../libs-user-ucore/arch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/user-ucore/cp.o cp.c
+LINK /home/oslab/ucore-mips-standard/obj/user-ucore/bin/cp
+"mips-sde-elf-"ld  -static -T ../libs-user-ucore/arch/mips/user.ld /home/oslab/ucore-mips-standard/obj/user-ucore/cp.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a -o /home/oslab/ucore-mips-standard/obj/user-ucore/bin/cp
+"mips-sde-elf-"gcc -I../libs-user-ucore/ -I../libs-user-ucore/common -I../libs-user-ucore/arch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/user-ucore/echo.o echo.c
+LINK /home/oslab/ucore-mips-standard/obj/user-ucore/bin/echo
+"mips-sde-elf-"ld  -static -T ../libs-user-ucore/arch/mips/user.ld /home/oslab/ucore-mips-standard/obj/user-ucore/echo.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a -o /home/oslab/ucore-mips-standard/obj/user-ucore/bin/echo
+"mips-sde-elf-"gcc -I../libs-user-ucore/ -I../libs-user-ucore/common -I../libs-user-ucore/arch/mips -nostdinc -nostdlib -fno-builtin -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -Wformat -O0 -mno-mips16 -mno-micromips -msoft-float -march=m14kec  -DMACH_FPGA -msoft-float -c -o /home/oslab/ucore-mips-standard/obj/user-ucore/num.o num.c
+LINK /home/oslab/ucore-mips-standard/obj/user-ucore/bin/num
+"mips-sde-elf-"ld  -static -T ../libs-user-ucore/arch/mips/user.ld /home/oslab/ucore-mips-standard/obj/user-ucore/num.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/arch/mips/initcode.o /home/oslab/ucore-mips-standard/obj/libs-user-ucore/ulib.a -o /home/oslab/ucore-mips-standard/obj/user-ucore/bin/num
+Making /home/oslab/ucore-mips-standard/obj/sfs-orig.img
+ln -snf _initial.big _initial
+ mips
+create /home/oslab/ucore-mips-standard/obj/sfs-orig.img (/home/oslab/ucore-mips-standard/obj/.tmpsfs) successfully.
+mkdir -p /home/oslab/ucore-mips-standard/obj/kernel
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/schedule
+DEP sched_RR.c
+DEP sched.c
+CC sched.c
+CC sched_RR.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/schedule/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/syscall
+DEP gettimeofday.c
+CC gettimeofday.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/syscall/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/fs
+DEP sysfile.c
+DEP iobuf.c
+DEP fs.c
+DEP file.c
+CC file.c
+CC fs.c
+CC iobuf.c
+CC sysfile.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/fs/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/fs/devs
+DEP dev_stdout.c
+DEP dev_stdin.c
+DEP dev_null.c
+DEP dev_disk1.c
+DEP dev_disk0.c
+DEP dev.c
+CC dev.c
+CC dev_disk0.c
+CC dev_disk1.c
+CC dev_null.c
+CC dev_stdin.c
+CC dev_stdout.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/fs/devs/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/fs/pipe
+DEP pipe_state.c
+DEP pipe_root.c
+DEP pipe_inode.c
+DEP pipe.c
+CC pipe.c
+CC pipe_inode.c
+CC pipe_root.c
+CC pipe_state.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/fs/pipe/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/fs/vfs
+DEP vfspath.c
+DEP vfslookup.c
+DEP vfsfile.c
+DEP vfsdev.c
+DEP vfs.c
+DEP inode.c
+CC inode.c
+CC vfs.c
+CC vfsdev.c
+CC vfsfile.c
+CC vfslookup.c
+CC vfspath.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/fs/vfs/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/fs/swap
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/fs/sfs
+DEP sfs_lock.c
+DEP sfs_io.c
+DEP sfs_inode.c
+DEP sfs_fs.c
+DEP sfs.c
+DEP bitmap.c
+CC bitmap.c
+CC sfs.c
+CC sfs_fs.c
+CC sfs_inode.c
+CC sfs_io.c
+CC sfs_lock.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/fs/sfs/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/process
+DEP signal.c
+DEP proc.c
+CC proc.c
+CC signal.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/process/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/mm
+DEP slab.c
+DEP vmm.c
+DEP swap.c
+DEP shmem.c
+CC shmem.c
+CC swap.c
+CC vmm.c
+CC slab.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/mm/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/libs
+DEP string.c
+DEP readline.c
+DEP rb_tree.c
+CC rb_tree.c
+CC readline.c
+CC string.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/libs/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/glue-ucore
+DEP pmm.c
+CC pmm.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/glue-ucore/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/glue-ucore/libs
+DEP string.c
+DEP rand.c
+DEP printfmt.c
+DEP hash.c
+CC hash.c
+CC printfmt.c
+CC rand.c
+CC string.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/glue-ucore/libs/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/sync
+DEP wait.c
+DEP sync.c
+DEP sem.c
+DEP mbox.c
+DEP event.c
+CC event.c
+CC mbox.c
+CC sem.c
+CC sync.c
+CC wait.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/sync/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/debug
+DEP panic.c
+DEP monitor.c
+DEP kdebug.c
+CC kdebug.c
+CC monitor.c
+CC panic.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/debug/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/driver
+DEP picirq.c
+DEP ramdisk.c
+DEP intr.c
+DEP ide.c
+DEP console.c
+DEP clock.c
+CC clock.c
+CC console.c
+CC ide.c
+CC intr.c
+CC ramdisk.c
+CC picirq.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/driver/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/init
+DEP init.c
+CC init.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/init/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/mm
+DEP vmm.c
+DEP thumips_tlb.c
+DEP pmm.c
+DEP buddy_pmm.c
+CC buddy_pmm.c
+CC pmm.c
+CC thumips_tlb.c
+CC vmm.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/mm/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process
+DEP signal.c
+DEP proc.c
+CC proc.c
+CC signal.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/process/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/libs
+DEP divmod.c
+DEP udivmod.c
+DEP udivmodsi4.c
+DEP mips_io.c
+CC mips_io.c
+CC udivmodsi4.c
+CC udivmod.c
+CC divmod.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/libs/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/syscall
+DEP syscall.c
+CC syscall.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/syscall/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/glue-ucore
+DEP mp.c
+CC mp.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/glue-ucore/builtin.o
+Enter /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap
+DEP trap.c
+CC trap.c
+LD /home/oslab/ucore-mips-standard/obj/kernel/arch/mips/trap/builtin.o
+Building uCore Kernel for mips
+"mips-sde-elf-"gcc -g -fno-builtin -nostdlib  -nostdinc -EL -G0 -fno-delayed-branch -Wa,-O0 -c -mno-mips16 -mno-micromips -msoft-float -march=m14kec -msoft-float -o /home/oslab/ucore-mips-standard/obj/bootloader/loader.o arch/mips/bootasm.S
+"mips-sde-elf-"ld -EL -n -G0 -Ttext 0xbfc00000 -o /home/oslab/ucore-mips-standard/obj/bootloader/loader /home/oslab/ucore-mips-standard/obj/bootloader/loader.o
+"mips-sde-elf-"objcopy -O binary  -S /home/oslab/ucore-mips-standard/obj/bootloader/loader /home/oslab/ucore-mips-standard/obj/bootloader/loader.bin
+mkdir -p /home/oslab/ucore-mips-standard/obj/kernel
+mkdir -p /home/oslab/ucore-mips-standard/obj/kernel/init
+mkdir -p /home/oslab/ucore-mips-standard/obj/kernel/trap
+mkdir -p /home/oslab/ucore-mips-standard/obj/kernel/process
+mkdir -p /home/oslab/ucore-mips-standard/obj/kernel/module
+"mips-sde-elf-"gcc -g -mips32 -c -D__ASSEMBLY__ -DMACH_FPGA -EL -G0 -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/init -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/libs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/debug -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/driver -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/mm -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/sync -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/schedule -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/syscall -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/vfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/sfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/devs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/glue-ucore -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/module /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/init/entry.S  -o /home/oslab/ucore-mips-standard/obj/kernel/init/entry.o
+"mips-sde-elf-"gcc -g -mips32 -c -D__ASSEMBLY__ -DMACH_FPGA -EL -G0 -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/init -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/libs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/debug -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/driver -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/mm -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/sync -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/schedule -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/syscall -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/vfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/sfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/devs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/glue-ucore -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/module /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap/exception.S  -o /home/oslab/ucore-mips-standard/obj/kernel/trap/exception.o
+"mips-sde-elf-"gcc -g -mips32 -c -D__ASSEMBLY__ -DMACH_FPGA -EL -G0 -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/init -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/libs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/debug -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/driver -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/mm -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/sync -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/schedule -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/syscall -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/vfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/sfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/devs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/glue-ucore -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/module /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap/vectors.S  -o /home/oslab/ucore-mips-standard/obj/kernel/trap/vectors.o
+"mips-sde-elf-"gcc -g -mips32 -c -D__ASSEMBLY__ -DMACH_FPGA -EL -G0 -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/init -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/libs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/debug -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/driver -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/mm -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/sync -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/schedule -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/syscall -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/vfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/sfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/devs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/glue-ucore -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/module /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process/entry.S  -o /home/oslab/ucore-mips-standard/obj/kernel/process/entry.o
+"mips-sde-elf-"gcc -g -mips32 -c -D__ASSEMBLY__ -DMACH_FPGA -EL -G0 -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/init -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/libs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/debug -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/driver -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/trap -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/mm -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/sync -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/schedule -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/syscall -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/vfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/sfs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/fs/devs -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/glue-ucore -I/home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/module /home/oslab/ucore-mips-standard/src/kern-ucore/arch/mips/process/switch.S  -o /home/oslab/ucore-mips-standard/obj/kernel/process/switch.o
+Linking uCore
+sed 's%_FILE_%/home/oslab/ucore-mips-standard/obj/sfs-orig.img%g' tools/initrd_piggy.S.in > /home/oslab/ucore-mips-standard/obj/kernel/initrd_piggy.S
+"mips-sde-elf-"as -g -EL -mno-micromips -msoft-float -march=m14kec /home/oslab/ucore-mips-standard/obj/kernel/initrd_piggy.S -o /home/oslab/ucore-mips-standard/obj/kernel/initrd.img.o
