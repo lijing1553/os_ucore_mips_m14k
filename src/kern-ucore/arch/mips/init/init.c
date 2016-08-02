@@ -33,17 +33,17 @@ void __noreturn kern_init(void)
 
 	check_initrd();
 
-	const char *message = "(THU.CST) os is loading ...\n\n";
+	const char *message = "(THU.CST) os is loading ...\n\r\n\r";
 	kprintf(message);
 	print_kerninfo();
 
 #if 0
-	kprintf("EX\n");
+	kprintf("EX\n\r");
 	__asm__ volatile ("syscall");
-	kprintf("EX RET\n");
+	kprintf("EX RET\n\r");
 #endif
 
-	//pmm_init();		// init physical memory management
+	pmm_init();		// init physical memory management
 
 /* SZY comments: heavy commented here.*/
 	vmm_init();		// init virtual memory management

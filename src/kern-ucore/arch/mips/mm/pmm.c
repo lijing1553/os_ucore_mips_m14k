@@ -43,7 +43,7 @@ static void init_pmm_manager(void)
 	pmm_manager = &buddy_pmm_manager;
 	kprintf("memory management: ");
 	kprintf(pmm_manager->name);
-	kprintf("\n");
+	kprintf("\n\r");
 	pmm_manager->init();
 }
 
@@ -98,12 +98,12 @@ static void page_init(void)
 	int i;
 
 	//panic("unimpl");
-	kprintf("memory map:\n");
+	kprintf("memory map:\n\r");
 	kprintf("    [0x");
 	printhex(KERNBASE);
 	kprintf(", 0x");
 	printhex(KERNTOP);
-	kprintf("]\n\n");
+	kprintf("]\n\r\n\r");
 
 	maxpa = KERNTOP;
 	npage = KMEMSIZE >> PGSHIFT;
@@ -120,7 +120,7 @@ static void page_init(void)
 
 	uintptr_t freemem =
 	    PADDR((uintptr_t) pages + sizeof(struct Page) * npage);
-	kprintf( "freemem start at:%x\n", freemem );
+	kprintf( "freemem start at:%x\n\r", freemem );
 
 	uint32_t mbegin = ROUNDUP_2N(freemem, PGSHIFT);
 	uint32_t mend = ROUNDDOWN_2N(KERNTOP, PGSHIFT);
@@ -164,7 +164,7 @@ static void *boot_alloc_page(void)
 {
 	struct Page *p = alloc_page();
 	if (p == NULL) {
-		panic("boot_alloc_page failed.\n");
+		panic("boot_alloc_page failed.\n\r");
 	}
 	return page2kva(p);
 }
@@ -248,7 +248,7 @@ extern int swap_init_ok;
 static void check_alloc_page(void)
 {
 	pmm_manager->check();
-	kprintf("check_alloc_page() succeeded!\n");
+	kprintf("check_alloc_page() succeeded!\n\r");
 }
 
 static void check_pgdir(void)
@@ -296,44 +296,68 @@ static void check_pgdir(void)
 	free_page(pa2page(boot_pgdir[0]));
 	boot_pgdir[0] = 0;
 
-	kprintf("check_pgdir() succeeded!\n");
+	kprintf("check_pgdir() succeeded!\n\r");
 }
 
 static void check_boot_pgdir(void)
 {
 	pte_t *ptep;
 	int i;
+//unsigned int k;
 	//assert(PDE_ADDR(boot_pgdir[PDX(VPT)]) == PADDR(boot_pgdir));
 
 	assert(boot_pgdir[0] == 0);
 	struct Page *p;
 	p = alloc_page();
-	*(int *)(page2kva(p) + 0x1100) = 0x1234;
+	*(int *)(page2kva(p) + 0x100) = 0x1234;
 	kprintf("page2kva(p):0x%08x",page2kva(p));
-	kprintf("\n");
-	kprintf("*(int*)(page2kva(p)+0x1100):0x%08x",*(int*)(page2kva(p)+0x1100));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
 
-	assert(page_insert(boot_pgdir, p, 0x1100, PTE_W) == 0);
+	assert(page_insert(boot_pgdir, p, 0x100, PTE_W) == 0);
 	assert(page_ref(p) == 1);
-	assert(page_insert(boot_pgdir, p, 0x1100 + PGSIZE, PTE_W) == 0);
+	kprintf("page2kva(p):0x%08x",page2kva(p));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
+	kprintf("\n\r");
+	kprintf("*(int*)(0x100):0x%08x",*(int*)(0x100));
+	assert(page_insert(boot_pgdir, p, 0x100 + PGSIZE, PTE_W) == 0);
 	assert(page_ref(p) == 2);
 
-	kprintf("\nHERE\n");
-
-	assert(*(int *)0x1100 == 0x1234);
+	kprintf("\n\rHERE\n\r");
+	kprintf("page2kva(p):0x%08x",page2kva(p));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
+	//for(k=0x0;k<0x02000000;k+=0x1000)
+	kprintf("\n\r*(int*)(0x100):0x%08x",*(int*)(0x100));
+	kprintf("\n\r");
+	
+	kprintf("page2kva(p):0x%08x",page2kva(p));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
+	assert(*(int *)0x100 == 0x1234);
 	const char *str = "ucore: Hello world!!";
-	strcpy((void *)0x1100, str);
-	assert(strcmp((void *)0x1100, (void *)(0x1100 + PGSIZE)) == 0);
-
-	*(char *)(page2kva(p) + 0x1100) = '\0';
-	assert(strlen((const char *)0x1100) == 0);
-
+	strcpy((void *)0x100, str);
+	kprintf("\n\r*(int*)(0x100):0x%08x",*(int*)(0x100));
+	kprintf("\n\r");
+	assert(strcmp((void *)0x100, (void *)(0x100 + PGSIZE)) == 0);
+	
+	kprintf("page2kva(p):0x%08x",page2kva(p));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
+	kprintf("\n\r");
+	*(char *)(page2kva(p) + 0x100) = '\0';
+	assert(strlen((const char *)0x100) == 0);
+	kprintf("\n\r*(int*)(0x100):0x%08x",*(int*)(0x100));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
+	kprintf("\n\r");
 	free_page(p);
 	free_page(pa2page(PDE_ADDR(boot_pgdir[0])));
 	boot_pgdir[0] = 0;
 	tlb_invalidate_all();
 
-	kprintf("check_boot_pgdir() succeeded!\n");
+	kprintf("check_boot_pgdir() succeeded!\n\r");
 }
 
 //perm2str - use string 'u,r,w,-' to present the permission

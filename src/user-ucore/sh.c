@@ -51,6 +51,7 @@ int gettoken(char **p1, char **p2)
 
 char *readline(const char *prompt)
 {
+	printf("Ok\n\r");
 	static char buffer[BUFSIZE];
 	if (prompt != NULL) {
 		printf("%s", prompt);
@@ -58,7 +59,10 @@ char *readline(const char *prompt)
 	int ret, i = 0;
 	while (1) {
 		char c;
-		if ((ret = read(0, &c, sizeof(char))) < 0) {
+		ret = read(0, &c, sizeof(char));
+		printf("\n\r112233ok%d\n\r", ret);
+		printf("\n\rret=%d\n\r", ret);
+		if (ret < 0) {
 			return NULL;
 		} else if (ret == 0) {
 			if (i > 0) {
@@ -217,7 +221,7 @@ runit:
 int main(int argc, char **argv)
 {
 	int ret, interactive = 1;
-	printf("Welcome to sh!\n");
+	printf("Welcome to sh!\n\r");
 	if (argc == 2) {
 		if ((ret = reopen(0, argv[1], O_RDONLY)) != 0) {
 			return ret;
@@ -231,8 +235,10 @@ int main(int argc, char **argv)
 	assert(shcwd != NULL);
 
 	char *buffer;
+	printf("OK1buffer\n\r");
 	while ((buffer = readline((interactive) ? "$ " : NULL)) != NULL) {
-		printf("\n");
+	printf("OK2buffer\n\r");
+		printf("\n\r");
 		shcwd[0] = '\0';
 		int pid;
 		if ((pid = fork()) == 0) {

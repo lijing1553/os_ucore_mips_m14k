@@ -10,10 +10,9 @@
 //#include <vga.h>
 
 /* stupid I/O delay routine necessitated by historical PC design flaws */
-static void delay(void)
-{
+void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (50000); j++) ; // delay
+	for (j = 0; j < (1000); j++) ; // delay
 }
 
 //#define DEBUG_COM1
@@ -59,22 +58,7 @@ static void serial_init(void)
 	if (serial_exists)
 		return;
 	serial_exists = 1;
-#ifdef MACH_QEMU
-	// Turn off the FIFO
-	outb(COM1 + COM_FCR, 0);
-	// Set speed; requires DLAB latch
-	outb(COM1 + COM_LCR, COM_LCR_DLAB);
-	outb(COM1 + COM_DLL, (uint8_t) (115200 / 9600));
-	outb(COM1 + COM_DLM, 0);
 
-	// 8 data bits, 1 stop bit, parity off; turn off DLAB latch
-	outb(COM1 + COM_LCR, COM_LCR_WLEN8 & ~COM_LCR_DLAB);
-
-	// No modem controls
-	outb(COM1 + COM_MCR, 0);
-	// Enable rcv interrupts
-	outb(COM1 + COM_IER, COM_IER_RDI);
-#elif defined MACH_FPGA
 	//TODO
 	//outw(COM1 + COM_LCR,COM_LCR_DLAB);
 	//outw(COM1 + COM_DLL,(uint32_t)(115200 / 9600));
@@ -97,7 +81,7 @@ static void serial_init(void)
 	delay();
 	outw(COM1 + COM_IER, COM_IER_RDI);
 	delay();
-#endif
+
 
 	pic_enable(COM1_IRQ);
         //pic_enable(KEYBOARD_IRQ);
@@ -106,15 +90,13 @@ static void serial_init(void)
 
 static void serial_putc_sub(int c)
 {
-#ifdef MACH_QEMU
-	outb(COM1 + COM_THR, c);
-#elif defined MACH_FPGA
+
 	//TODO
-	while ((inw(COM1 + COM_IER) & COM_IER_RDI) == 0) delay();
-	delay();
+	if ((inw(COM1 + COM_IER) & COM_IER_RDI) == 0) delay();
+	//delay();
 	outw(COM1 + COM_THR, c & 0xFF);
 	delay();
-#endif
+
 }
 
 /* serial_putc - print character to serial port */
@@ -133,12 +115,7 @@ static void serial_putc(int c)
 static int serial_proc_data(void)
 {
 	int c;
-#ifdef MACH_QEMU
-	if (!(inb(COM1 + COM_LSR) & COM_LSR_DATA)) {
-		return -1;
-	}
-	c = inb(COM1 + COM_RBR);
-#elif defined MACH_FPGA
+
 	//TODO
 	delay();
 	if ((inw(COM1 + COM_LSR) & COM_LSR_DATA) == 0)
@@ -146,7 +123,7 @@ static int serial_proc_data(void)
 	delay();
 	c = inw(COM1 + COM_RBR) & 0xFF;
 	delay();
-#endif
+
 	if (c == 127) {
 		c = '\b';
 	}
@@ -155,11 +132,7 @@ static int serial_proc_data(void)
 
 void serial_int_handler(void *opaque)
 {
-#ifdef MACH_QEMU
-	unsigned char id = inb(COM1 + COM_IIR);
-	if (id & 0x01)
-		return;
-#endif
+
 	//int c = serial_proc_data();
 	int c = cons_getc();//c);
 	extern void dev_stdin_write(char c);

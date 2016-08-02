@@ -436,6 +436,8 @@ const char *argv[] = {path, ##__VA_ARGS__, NULL};       \
 void cpu_idle(void)
 {
 	while (1) {
+	//kprintf("current->need_resched=%d \n\r",current->need_resched);
+	//current->need_resched = 1;
 		if (current->need_resched) {
 			schedule();
 		}

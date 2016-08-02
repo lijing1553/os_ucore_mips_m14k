@@ -19,6 +19,7 @@ int close(int fd)
 
 int read(int fd, void *base, size_t len)
 {
+	cputs("sysread\n\r\0");
 	return sys_read(fd, base, len);
 }
 

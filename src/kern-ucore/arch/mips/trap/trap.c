@@ -26,7 +26,7 @@
 
 static void print_ticks()
 {
-	PRINT_HEX("%d ticks\n", TICK_NUM);
+	PRINT_HEX("%d ticks\n\r", TICK_NUM);
 }
 
 static const char *trapname(int trapno)
@@ -65,7 +65,7 @@ void print_regs(struct pushregs *regs)
 		printbase10(i + 1);
 		kprintf("\t: ");
 		printhex(regs->reg_r[i]);
-		kputchar('\n');
+		kprintf("\n\r");
 	}
 }
 
@@ -73,18 +73,18 @@ void print_trapframe(struct trapframe *tf)
 {
 	PRINT_HEX("trapframe at ", tf);
 	print_regs(&tf->tf_regs);
-	PRINT_HEX(" $ra\t: ", tf->tf_ra);
-	PRINT_HEX(" BadVA\t: ", tf->tf_vaddr);
-	PRINT_HEX(" Status\t: ", tf->tf_status);
-	PRINT_HEX(" Cause\t: ", tf->tf_cause);
-	PRINT_HEX(" EPC\t: ", tf->tf_epc);
+	PRINT_HEX("\r\n $ra: ", tf->tf_ra);
+	PRINT_HEX("\r\n BadVA: ", tf->tf_vaddr);
+	PRINT_HEX("\r\n Status: ", tf->tf_status);
+	PRINT_HEX("\r\n Cause: ", tf->tf_cause);
+	PRINT_HEX("\r\n EPC ", tf->tf_epc);
 	if (!trap_in_kernel(tf)) {
-		kprintf("Trap in usermode: ");
+		kprintf("\r\nTrap in usermode: ");
 	} else {
-		kprintf("Trap in kernel: ");
+		kprintf("\n\rTrap in kernel: ");
 	}
 	kprintf(trapname(GET_CAUSE_EXCODE(tf->tf_cause)));
-	kputchar('\n');
+	kprintf("\n\r");
 }
 //#define DEBUG_INT
 
@@ -104,7 +104,7 @@ static void interrupt_handler(struct trapframe *tf)
 				clock_int_handler(NULL);
 				break;
 			case COM1_IRQ:
-				//kprintf("COM1\n");
+				kprintf("COM1\n\r");
 				serial_int_handler(NULL);
 				break;
 /*                        case KEYBOARD_IRQ:
@@ -156,9 +156,9 @@ pgfault_handler(struct trapframe *tf, uint32_t addr, uint32_t error_code)
 		mm = check_mm_struct;
 	} else {
 		if (current == NULL) {
-			print_trapframe(tf);
+			//print_trapframe(tf);
 			//print_pgfault(tf);
-			panic("unhandled page fault.\n");
+			panic("unhandled page fault.\n\r");
 		}
 		mm = current->mm;
 	}			//kprintf("  (do_pgfault(%x,%d,%x))  ", mm, error_code, addr);
@@ -184,10 +184,10 @@ static void handle_tlbmiss(struct trapframe *tf, int write, int perm)//YX )
 		while (1) ;
 	}
 #endif
-
+	//dump_tlb_all();
 	static int entercnt = 0;
 	entercnt++;
-//	kprintf("## enter handle_tlbmiss %d times\n", entercnt);
+	//kprintf("## enter handle_tlbmiss %d times\n\r", entercnt);
 
 	int in_kernel = trap_in_kernel(tf);
 	assert(current_pgdir != NULL);
@@ -208,7 +208,8 @@ static void handle_tlbmiss(struct trapframe *tf, int write, int perm)//YX )
 		/* check permission */
 		if (in_kernel) {
 			tlb_refill(badaddr, pte);
-			//kprintf("## refill K\n");
+			//kprintf("## refill K\n\r");
+			//dump_tlb_all();
 			return;
 		} else {
 			if (!ptep_u_read(pte)) {
@@ -219,7 +220,7 @@ static void handle_tlbmiss(struct trapframe *tf, int write, int perm)//YX )
 				ret = -2;
 				goto exit;
 			}
-			//kprintf("## refill U %d %08x\n", write, badaddr);
+			//kprintf("## refill U %d %08x\n\r", write, badaddr);
 			tlb_refill(badaddr, pte);
 			return;
 		}

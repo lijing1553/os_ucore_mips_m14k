@@ -4,6 +4,8 @@
 #include <memlayout.h>
 #include <swap.h>
 #include <mp.h>
+#include <thumips_tlb.h>
+#include <mips_io.h>
 
 /**************************************************
  * Page table operations
@@ -166,7 +168,13 @@ void page_remove_pte(pgd_t * pgdir, uintptr_t la, pte_t * ptep)
  */
 int page_insert(pgd_t * pgdir, struct Page *page, uintptr_t la, pte_perm_t perm)
 {
+
 	pte_t *ptep = get_pte(pgdir, la, 1);
+	/*kprintf("page2kva(p):0x%08x",page2kva(page));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x1100):0x%08x",*(int*)(page2kva(page)+0x1100));
+		kprintf("\n\r");
+	kprintf("*(int*)(0x1100):0x%08x",*(int*)(0x1100));*/
 	if (ptep == NULL) {
 		return -E_NO_MEM;
 	}
@@ -180,10 +188,16 @@ int page_insert(pgd_t * pgdir, struct Page *page, uintptr_t la, pte_perm_t perm)
 	}
 
 out:
+	/*kprintf("page2kva(p):0x%08x",page2kva(page));
+	kprintf("\n\r");
+	kprintf("*(int*)(page2kva(p)+0x1100):0x%08x",*(int*)(page2kva(page)+0x1100));
+		kprintf("\n\r");
+	kprintf("*(int*)(0x1100):0x%08x",*(int*)(0x1100));*/
 	ptep_map(ptep, page2pa(page));
 	ptep_set_perm(ptep, perm);
 	mp_tlb_update(pgdir, la);
 	return 0;
+
 }
 
 #ifdef UCONFIG_BIONIC_LIBC

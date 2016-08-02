@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <error.h>
 #include <assert.h>
+#include <mips_io.h>
 
 #define IOBUF_SIZE                          4096
 
@@ -56,6 +57,8 @@ int sysfile_close(int fd)
 int sysfile_read(int fd, void *base, size_t len)
 {
 	int ret = 0;
+	kprintf("*base=%d\n\r",*(int*)base);
+	kprintf("len=%d\n\r",len);
 	struct mm_struct *mm = pls_read(current)->mm;
 	if (len == 0) {
 		return 0;

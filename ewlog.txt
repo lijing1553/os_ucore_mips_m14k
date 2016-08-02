@@ -1,10 +1,11 @@
 2400+0 records in
 2400+0 records out
-1228800 bytes (1.2 MB) copied, 0.00671767 s, 183 MB/s
+1228800 bytes (1.2 MB) copied, 0.0105522 s, 116 MB/s
 sched.c: In function 'try_to_wakeup':
 sched.c:184:16: warning: assignment makes pointer from integer without a cast [enabled by default]
 init.c: In function 'kern_init':
 init.c:28:12: warning: initialization makes pointer from integer without a cast [enabled by default]
 syscall.c:347:5: warning: initialization from incompatible pointer type [enabled by default]
 syscall.c:347:5: warning: (near initialization for 'syscalls[242]') [enabled by default]
+arch/mips/bootasm.S:24:21: warning: backslash and newline separated by space [enabled by default]
 mips-sde-elf-ld: warning: cannot find entry symbol __reset_vector; defaulting to 0000000080001000

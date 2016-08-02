@@ -22,4 +22,5 @@
  /home/oslab/ucore-mips-standard_2/src/kern-ucore/glue-ucore/libs/error.h \
  /home/oslab/ucore-mips-standard_2/src/kern-ucore/mm/swap.h \
  /home/oslab/ucore-mips-standard_2/src/kern-ucore/glue-ucore/mp.h \
- /home/oslab/ucore-mips-standard_2/src/kern-ucore/../glue-kern/arch/mips/glue_mp.h
+ /home/oslab/ucore-mips-standard_2/src/kern-ucore/../glue-kern/arch/mips/glue_mp.h \
+ /home/oslab/ucore-mips-standard_2/src/kern-ucore/arch/mips/glue-ucore/thumips_tlb.h
