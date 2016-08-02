@@ -4,7 +4,7 @@
 .global _initrd_begin
 .type _initrd_begin, @object
 _initrd_begin:
-.incbin "/home/oslab/ucore-mips-standard_2/obj/sfs-orig.img"
+.incbin "/home/oslab/os_ucore_mips_m14k/obj/sfs-orig.img"
 
 .align 4
 .global _initrd_end

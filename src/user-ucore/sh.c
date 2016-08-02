@@ -51,7 +51,7 @@ int gettoken(char **p1, char **p2)
 
 char *readline(const char *prompt)
 {
-	printf("Ok\n\r");
+	//printf("Ok\n\r");
 	static char buffer[BUFSIZE];
 	if (prompt != NULL) {
 		printf("%s", prompt);
@@ -60,8 +60,8 @@ char *readline(const char *prompt)
 	while (1) {
 		char c;
 		ret = read(0, &c, sizeof(char));
-		printf("\n\r112233ok%d\n\r", ret);
-		printf("\n\rret=%d\n\r", ret);
+		//printf("\n\r112233ok%d\n\r", ret);
+		//printf("\n\rret=%d\n\r", ret);
 		if (ret < 0) {
 			return NULL;
 		} else if (ret == 0) {
@@ -75,13 +75,13 @@ char *readline(const char *prompt)
 		if (c == 3) {
 			return NULL;
 		} else if (c >= ' ' && i < BUFSIZE - 1) {
-			//putc(c);
+			putc(c);
 			buffer[i++] = c;
 		} else if (c == '\b' && i > 0) {
-			//putc(c);
+			putc(c);
 			i--;
 		} else if (c == '\n' || c == '\r') {
-			//putc(c);
+			putc(c);
 			buffer[i] = '\0';
 			break;
 		}
@@ -235,9 +235,9 @@ int main(int argc, char **argv)
 	assert(shcwd != NULL);
 
 	char *buffer;
-	printf("OK1buffer\n\r");
+	//printf("OK1buffer\n\r");
 	while ((buffer = readline((interactive) ? "$ " : NULL)) != NULL) {
-	printf("OK2buffer\n\r");
+	//printf("OK2buffer\n\r");
 		printf("\n\r");
 		shcwd[0] = '\0';
 		int pid;

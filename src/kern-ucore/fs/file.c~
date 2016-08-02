@@ -451,7 +451,7 @@ failed_cleanup_file:
 /* linux devfile adaptor */
 bool __is_linux_devfile(int fd)
 {
-	//kprintf("okok1\n\r");
+	kprintf("okok1\n\r");
 	int ret = -E_INVAL;
 	struct file *file;
 	if ((ret = fd2file(fd, &file)) != 0) {

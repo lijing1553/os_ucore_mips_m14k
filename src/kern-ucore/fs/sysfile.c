@@ -57,18 +57,21 @@ int sysfile_close(int fd)
 int sysfile_read(int fd, void *base, size_t len)
 {
 	int ret = 0;
-	kprintf("*base=%d\n\r",*(int*)base);
-	kprintf("len=%d\n\r",len);
+	//kprintf("*base=%d\n\r",*(int*)base);
+	//kprintf("len=%d\n\r",len);
 	struct mm_struct *mm = pls_read(current)->mm;
+	//kprintf("ok1\n\r");
 	if (len == 0) {
 		return 0;
 	}
+
 	if (!file_testfd(fd, 1, 0)) {
 		return -E_INVAL;
 	}
+	//kprintf("ok2\n\r");
 	/* for linux inode */
 	if (__is_linux_devfile(fd)) {
-		size_t alen = 0;
+		size_t alen = 0;//kprintf("ok2\n\r");
 		ret = linux_devfile_read(fd, base, len, &alen);
 		if (ret)
 			return ret;
