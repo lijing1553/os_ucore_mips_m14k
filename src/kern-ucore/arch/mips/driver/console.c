@@ -12,7 +12,7 @@
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 }
 
 //#define DEBUG_COM1

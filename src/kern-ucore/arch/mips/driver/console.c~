@@ -71,14 +71,14 @@ static void serial_init(void)
 	delay();
 	*WRITE_IO(COM1 + COM_THR)=0x0000000d;
 	delay();
-	*WRITE_IO(COM1 + COM_THR)=0x00000055;
+	/**WRITE_IO(COM1 + COM_THR)=0x00000055;
 	delay();
 	outw(COM1 + COM_THR, 0x00000061);
 	delay();
 	outw(COM1 + COM_THR, 0x00000072);
 	delay();
 	outw(COM1 + COM_THR, 0x00000074);
-	delay();
+	delay();*/
 	outw(COM1 + COM_IER, COM_IER_RDI);
 	delay();
 
@@ -210,7 +210,7 @@ void cons_init(void)
 //#endif
 	//cons.rpos = cons.wpos = 0;
 	if (!serial_exists) {
-		kprintf("serial port does not exist!!\n");
+		kprintf("serial port does not exist!!\n\r");
 	}
 }
 
@@ -253,7 +253,7 @@ int cons_getc(void)
 	}
 	local_intr_restore(intr_flag);
 #ifdef DEBUG_COM1
-	if (c) kprintf("cons_get(0x%x)\n", c);
+	if (c) kprintf("cons_get(0x%x)\n\r", c);
 #endif
 	return c;
 }

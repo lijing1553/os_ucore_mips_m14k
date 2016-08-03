@@ -1,6 +1,6 @@
 /*
  * Automatically generated C config: don't edit
- * Wed Aug  3 11:25:05 2016
+ * Wed Aug  3 11:32:33 2016
  */
 #define UCONFIG_ARCH "mips"
 #define UCONFIG_ADDITIONAL_LDFLAGS ""

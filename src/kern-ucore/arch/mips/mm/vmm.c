@@ -129,7 +129,7 @@ static void check_vma_struct(void)
 
 	assert(nr_free_pages_store == nr_free_pages());
 
-	kprintf("check_vma_struct() succeeded!\n\r");
+	kprintf("\n\rcheck_vma_struct() succeeded!\n\r");
 }
 
 struct mm_struct *check_mm_struct;

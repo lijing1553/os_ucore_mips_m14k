@@ -72750,17 +72750,17 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001ad68:	afa00000 	sw	zero,0(sp)
 8001ad6c:	8fa20000 	lw	v0,0(sp)
-8001ad70:	2c4203e8 	sltiu	v0,v0,1000
+8001ad70:	2c4201f4 	sltiu	v0,v0,500
 8001ad74:	10400009 	beqz	v0,8001ad9c <serial_putc_sub+0x48>
 8001ad78:	3c02b040 	lui	v0,0xb040
 8001ad7c:	8fa20000 	lw	v0,0(sp)
 8001ad80:	24420001 	addiu	v0,v0,1
 8001ad84:	afa20000 	sw	v0,0(sp)
 8001ad88:	8fa20000 	lw	v0,0(sp)
-8001ad8c:	2c4203e8 	sltiu	v0,v0,1000
+8001ad8c:	2c4201f4 	sltiu	v0,v0,500
 8001ad90:	1440fffa 	bnez	v0,8001ad7c <serial_putc_sub+0x28>
 8001ad94:	00000000 	nop
 outw():
@@ -72791,17 +72791,17 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001ada4:	afa00000 	sw	zero,0(sp)
 8001ada8:	8fa20000 	lw	v0,0(sp)
-8001adac:	2c4203e8 	sltiu	v0,v0,1000
+8001adac:	2c4201f4 	sltiu	v0,v0,500
 8001adb0:	10400008 	beqz	v0,8001add4 <serial_putc_sub+0x80>
 8001adb4:	00000000 	nop
 8001adb8:	8fa20000 	lw	v0,0(sp)
 8001adbc:	24420001 	addiu	v0,v0,1
 8001adc0:	afa20000 	sw	v0,0(sp)
 8001adc4:	8fa20000 	lw	v0,0(sp)
-8001adc8:	2c4203e8 	sltiu	v0,v0,1000
+8001adc8:	2c4201f4 	sltiu	v0,v0,500
 8001adcc:	1440fffa 	bnez	v0,8001adb8 <serial_putc_sub+0x64>
 8001add0:	00000000 	nop
 serial_putc_sub():
@@ -72827,17 +72827,17 @@ void delay() {
 8001addc:	27bdfff8 	addiu	sp,sp,-8
 /home/oslab/os_ucore_mips_m14k/src/kern-ucore/arch/mips/driver/console.c:15
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001ade0:	afa00000 	sw	zero,0(sp)
 8001ade4:	8fa20000 	lw	v0,0(sp)
-8001ade8:	2c4203e8 	sltiu	v0,v0,1000
+8001ade8:	2c4201f4 	sltiu	v0,v0,500
 8001adec:	10400008 	beqz	v0,8001ae10 <delay+0x34>
 8001adf0:	00000000 	nop
 8001adf4:	8fa20000 	lw	v0,0(sp)
 8001adf8:	24420001 	addiu	v0,v0,1
 8001adfc:	afa20000 	sw	v0,0(sp)
 8001ae00:	8fa20000 	lw	v0,0(sp)
-8001ae04:	2c4203e8 	sltiu	v0,v0,1000
+8001ae04:	2c4201f4 	sltiu	v0,v0,500
 8001ae08:	1440fffa 	bnez	v0,8001adf4 <delay+0x18>
 8001ae0c:	00000000 	nop
 /home/oslab/os_ucore_mips_m14k/src/kern-ucore/arch/mips/driver/console.c:16
@@ -72904,17 +72904,17 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001ae3c:	afa00000 	sw	zero,0(sp)
 8001ae40:	8fa20000 	lw	v0,0(sp)
-8001ae44:	2c4203e8 	sltiu	v0,v0,1000
+8001ae44:	2c4201f4 	sltiu	v0,v0,500
 8001ae48:	10400008 	beqz	v0,8001ae6c <serial_intr+0x54>
 8001ae4c:	00000000 	nop
 8001ae50:	8fa20000 	lw	v0,0(sp)
 8001ae54:	24420001 	addiu	v0,v0,1
 8001ae58:	afa20000 	sw	v0,0(sp)
 8001ae5c:	8fa20000 	lw	v0,0(sp)
-8001ae60:	2c4203e8 	sltiu	v0,v0,1000
+8001ae60:	2c4201f4 	sltiu	v0,v0,500
 8001ae64:	1440fffa 	bnez	v0,8001ae50 <serial_intr+0x38>
 8001ae68:	00000000 	nop
 inw():
@@ -72938,17 +72938,17 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001ae7c:	afa00000 	sw	zero,0(sp)
 8001ae80:	8fa20000 	lw	v0,0(sp)
-8001ae84:	2c4203e8 	sltiu	v0,v0,1000
+8001ae84:	2c4201f4 	sltiu	v0,v0,500
 8001ae88:	10400008 	beqz	v0,8001aeac <serial_intr+0x94>
 8001ae8c:	00000000 	nop
 8001ae90:	8fa20000 	lw	v0,0(sp)
 8001ae94:	24420001 	addiu	v0,v0,1
 8001ae98:	afa20000 	sw	v0,0(sp)
 8001ae9c:	8fa20000 	lw	v0,0(sp)
-8001aea0:	2c4203e8 	sltiu	v0,v0,1000
+8001aea0:	2c4201f4 	sltiu	v0,v0,500
 8001aea4:	1440fffa 	bnez	v0,8001ae90 <serial_intr+0x78>
 8001aea8:	00000000 	nop
 inw():
@@ -72958,14 +72958,14 @@ delay():
 /home/oslab/os_ucore_mips_m14k/src/kern-ucore/arch/mips/driver/console.c:15
 8001aeb0:	afa00000 	sw	zero,0(sp)
 8001aeb4:	8fa20000 	lw	v0,0(sp)
-8001aeb8:	2c4203e8 	sltiu	v0,v0,1000
+8001aeb8:	2c4201f4 	sltiu	v0,v0,500
 8001aebc:	10400008 	beqz	v0,8001aee0 <serial_intr+0xc8>
 8001aec0:	306300ff 	andi	v1,v1,0xff
 8001aec4:	8fa20000 	lw	v0,0(sp)
 8001aec8:	24420001 	addiu	v0,v0,1
 8001aecc:	afa20000 	sw	v0,0(sp)
 8001aed0:	8fa20000 	lw	v0,0(sp)
-8001aed4:	2c4203e8 	sltiu	v0,v0,1000
+8001aed4:	2c4201f4 	sltiu	v0,v0,500
 8001aed8:	1440fffa 	bnez	v0,8001aec4 <serial_intr+0xac>
 8001aedc:	00000000 	nop
 serial_proc_data():
@@ -73073,7 +73073,7 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001af3c:	afa00010 	sw	zero,16(sp)
 8001af40:	8fa20010 	lw	v0,16(sp)
 serial_init():
@@ -73092,15 +73092,15 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
-8001af48:	2c4203e8 	sltiu	v0,v0,1000
+	for (j = 0; j < (500); j++) ; // delay
+8001af48:	2c4201f4 	sltiu	v0,v0,500
 8001af4c:	10400008 	beqz	v0,8001af70 <cons_init+0x4c>
 8001af50:	ae036d0c 	sw	v1,27916(s0)
 8001af54:	8fa20010 	lw	v0,16(sp)
 8001af58:	24420001 	addiu	v0,v0,1
 8001af5c:	afa20010 	sw	v0,16(sp)
 8001af60:	8fa20010 	lw	v0,16(sp)
-8001af64:	2c4203e8 	sltiu	v0,v0,1000
+8001af64:	2c4201f4 	sltiu	v0,v0,500
 8001af68:	1440fffa 	bnez	v0,8001af54 <cons_init+0x30>
 8001af6c:	00000000 	nop
 serial_init():
@@ -73121,17 +73121,17 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001af7c:	afa00010 	sw	zero,16(sp)
 8001af80:	8fa20010 	lw	v0,16(sp)
-8001af84:	2c4203e8 	sltiu	v0,v0,1000
+8001af84:	2c4201f4 	sltiu	v0,v0,500
 8001af88:	10400008 	beqz	v0,8001afac <cons_init+0x88>
 8001af8c:	3c02b040 	lui	v0,0xb040
 8001af90:	8fa20010 	lw	v0,16(sp)
 8001af94:	24420001 	addiu	v0,v0,1
 8001af98:	afa20010 	sw	v0,16(sp)
 8001af9c:	8fa20010 	lw	v0,16(sp)
-8001afa0:	2c4203e8 	sltiu	v0,v0,1000
+8001afa0:	2c4201f4 	sltiu	v0,v0,500
 8001afa4:	1440fffa 	bnez	v0,8001af90 <cons_init+0x6c>
 8001afa8:	3c02b040 	lui	v0,0xb040
 serial_init():
@@ -73151,17 +73151,17 @@ delay():
 /* stupid I/O delay routine necessitated by historical PC design flaws */
 void delay() {
 	volatile unsigned int j;
-	for (j = 0; j < (1000); j++) ; // delay
+	for (j = 0; j < (500); j++) ; // delay
 8001afb4:	afa00010 	sw	zero,16(sp)
 8001afb8:	8fa20010 	lw	v0,16(sp)
-8001afbc:	2c4203e8 	sltiu	v0,v0,1000
+8001afbc:	2c4201f4 	sltiu	v0,v0,500
 8001afc0:	10400008 	beqz	v0,8001afe4 <cons_init+0xc0>
 8001afc4:	3c02b040 	lui	v0,0xb040
 8001afc8:	8fa20010 	lw	v0,16(sp)
 8001afcc:	24420001 	addiu	v0,v0,1
 8001afd0:	afa20010 	sw	v0,16(sp)
 8001afd4:	8fa20010 	lw	v0,16(sp)
-8001afd8:	2c4203e8 	sltiu	v0,v0,1000
+8001afd8:	2c4201f4 	sltiu	v0,v0,500
 8001afdc:	1440fffa 	bnez	v0,8001afc8 <cons_init+0xa4>
 8001afe0:	3c02b040 	lui	v0,0xb040
 outw():
@@ -73178,14 +73178,14 @@ delay():
 /home/oslab/os_ucore_mips_m14k/src/kern-ucore/arch/mips/driver/console.c:15
 8001afec:	afa00010 	sw	zero,16(sp)
 8001aff0:	8fa20010 	lw	v0,16(sp)
-8001aff4:	2c4203e8 	sltiu	v0,v0,1000
+8001aff4:	2c4201f4 	sltiu	v0,v0,500
 8001aff8:	10400008 	beqz	v0,8001b01c <cons_init+0xf8>
 8001affc:	00000000 	nop
 8001b000:	8fa20010 	lw	v0,16(sp)
 8001b004:	24420001 	addiu	v0,v0,1
 8001b008:	afa20010 	sw	v0,16(sp)
 8001b00c:	8fa20010 	lw	v0,16(sp)
-8001b010:	2c4203e8 	sltiu	v0,v0,1000
+8001b010:	2c4201f4 	sltiu	v0,v0,500
 8001b014:	1440fffa 	bnez	v0,8001b000 <cons_init+0xdc>
 8001b018:	00000000 	nop
 serial_init():
