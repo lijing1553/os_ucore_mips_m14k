@@ -56,7 +56,7 @@ try_again:
 				//kprintf("asd1234\n\r");
 				char c = stdin_buffer[p_rpos % STDIN_BUFSIZE];
 				//FIXME
-				kcons_putc(c);
+				c=getchar();
 				*buf++ = c;
 				p_rpos++;
 				ret++;

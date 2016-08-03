@@ -23,7 +23,7 @@ static wait_queue_t __wait_queue, *wait_queue = &__wait_queue;
 void dev_stdin_write(char c)
 {
 	bool intr_flag;
-	kprintf("asdwwww\n\r");
+	//kprintf("asdwwww\n\r");
 	if (c != '\0') {
 		local_intr_save(intr_flag);
 		{
@@ -63,13 +63,13 @@ try_again:
 				if (p_rpos <= p_wpos)
 					break;
 			} else {
-				kprintf("asd123456\n\r");
+				//kprintf("asd123456\n\r");
 				wait_t __wait, *wait = &__wait;
 				wait_current_set(wait_queue, wait, WT_KBD);
 				local_intr_restore(intr_flag);
 
 				schedule();
-				kprintf("asd123456\n\r");
+				//kprintf("asd123456\n\r");
 				local_intr_save(intr_flag);
 				wait_current_del(wait_queue, wait);
 				if (wait->wakeup_flags == WT_KBD) {

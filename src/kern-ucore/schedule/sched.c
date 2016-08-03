@@ -25,7 +25,7 @@ int sched_collect_info = 1;
 
 void db_sched(int lines)
 {
-	kprintf("\n");
+	kprintf("\n\r");
 
 	int lcpu_count = pls_read(lcpu_count);
 	int i, j, k;
@@ -218,10 +218,10 @@ void schedule(void)
         	}
         	next->runs ++;
         	if (next != current) {
-            		//kprintf("########################\n");
+            		//kprintf("########################\n\r");
             		//kprintf("c %d TO %d\n", current->pid, next->pid);
            		//print_trapframe(next->tf);
-            		//kprintf("@@@@@@@@@@@@@@@@@@@@@@@@\n");
+            		//kprintf("@@@@@@@@@@@@@@@@@@@@@@@@\n\r");
             		proc_run(next);
         	}
     	}

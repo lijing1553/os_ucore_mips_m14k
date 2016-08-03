@@ -309,7 +309,7 @@ vfs_mount(const char *devname,
 	struct device *dev = vop_info(vdev->devnode, device);
 	if ((ret = mountfunc(dev, &(vdev->fs))) == 0) {
 		assert(vdev->fs != NULL);
-		kprintf("\n\rvfs: mount %s.\n\r", vdev->devname);
+		kprintf("vfs: mount %s.\n\r", vdev->devname);
 	}
 
 out:

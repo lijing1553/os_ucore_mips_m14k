@@ -227,7 +227,7 @@ void vma_mapfile(struct vma_struct *vma, int fd, off_t off, struct fs_struct *fs
 	}
 
 	/*
-	   kprintf("mapfile:0x%08x fs_struct:0x%08x\n\r", vma->mfile.file, fs_struct);
+	   kprintf("mapfile:0x%08x fs_struct:0x%08x\n", vma->mfile.file, fs_struct);
 	 */
 
 	vma->mfile.offset = off;
@@ -239,7 +239,7 @@ void vma_mapfile(struct vma_struct *vma, int fd, off_t off, struct fs_struct *fs
 static void vma_unmapfile(struct vma_struct *vma)
 {
 	/*
-	   kprintf("un_mapfile:0x%08x\n\r", vma->mfile.file);
+	   kprintf("un_mapfile:0x%08x\n", vma->mfile.file);
 	 */
 
 	if (vma->mfile.file != NULL) {
@@ -251,7 +251,7 @@ static void vma_unmapfile(struct vma_struct *vma)
 static void vma_copymapfile(struct vma_struct *to, struct vma_struct *from)
 {
 	/*
-	   kprintf("copy_mapfile:0x%08x\n\r", from->mfile.file);
+	   kprintf("copy_mapfile:0x%08x\n", from->mfile.file);
 	 */
 
 	to->mfile = from->mfile;
@@ -636,14 +636,14 @@ void exit_mmap(struct mm_struct *mm)
 #ifdef UCONFIG_BIONIC_LIBC
 int remapfile(struct mm_struct *mm, struct proc_struct *proc)
 {
-	//kprintf("remap!!\n\r");
+	//kprintf("remap!!\n");
 	assert(mm != NULL);
 	list_entry_t *list = &(mm->mmap_list), *le = list;
 	while ((le = list_prev(le)) != list) {
 		struct vma_struct *vma = le2vma(le, list_link);
 		if (vma->mfile.file != NULL) {
 			/*
-			   kprintf("remapfile:0x%08x fd:%d offset:0x%08x\n\r", vma->mfile.file, vma->mfile.file->fd,
+			   kprintf("remapfile:0x%08x fd:%d offset:0x%08x\n", vma->mfile.file, vma->mfile.file->fd,
 			   vma->mfile.offset);
 			 */
 			vma_mapfile(vma, vma->mfile.file->fd, vma->mfile.offset, proc->fs_struct);
@@ -741,7 +741,7 @@ static void check_vmm(void)
 
 	__CHECK_MEMORY_LEAK();
 
-	kprintf("check_vmm() succeeded.\n\r");
+	kprintf("check_vmm() succeeded.\n");
 }
 
 static void check_vma_struct(void)
@@ -790,7 +790,7 @@ static void check_vma_struct(void)
 
 	__CHECK_MEMORY_LEAK();
 
-	kprintf("check_vma_struct() succeeded!\n\r");
+	kprintf("check_vma_struct() succeeded!\n");
 }
 
 struct mm_struct *check_mm_struct;
@@ -799,7 +799,7 @@ struct mm_struct *check_mm_struct;
 static void check_pgfault(void)
 {
 #ifdef UCONFIG_CHECK_PGFAULT
-	kprintf("starting check_pgfault()\n\r");
+	kprintf("starting check_pgfault()\n");
 	size_t nr_used_pages_store = nr_used_pages();
 	size_t slab_allocated_store = slab_allocated();
 
@@ -845,7 +845,7 @@ static void check_pgfault(void)
 	assert(nr_used_pages_store == nr_used_pages());
 	assert(slab_allocated_store == slab_allocated());
 
-	kprintf("check_pgfault() succeeded!\n\r");
+	kprintf("check_pgfault() succeeded!\n");
 #endif
 }
 
@@ -880,7 +880,7 @@ int do_pgfault(struct mm_struct *mm, machine_word_t error_code, uintptr_t addr)
 		 * give handler a chance to deal with it 
 		 */
 		kprintf
-		    ("page fault in kernel thread: pid = %d, name = %s, %d %08x.\n\r",
+		    ("page fault in kernel thread: pid = %d, name = %s, %d %08x.\n",
 		     current->pid, current->name, error_code, addr);
 		return -E_KILLED;
 	}
@@ -1055,7 +1055,7 @@ int do_pgfault(struct mm_struct *mm, machine_word_t error_code, uintptr_t addr)
 		if (!(!ptep_present(ptep)
 		      || ((error_code & 2) && !ptep_u_write(ptep) && cow))) {
 			//assert(PADDR(mm->pgdir) == rcr3());
-			kprintf("%p %p %d %d %x\n\r", *ptep, addr, error_code,
+			kprintf("%p %p %d %d %x\n", *ptep, addr, error_code,
 				cow, vma->vm_flags);
 			assert(0);
 		}
@@ -1099,7 +1099,7 @@ int do_pgfault(struct mm_struct *mm, machine_word_t error_code, uintptr_t addr)
 				}
 				memcpy(page2kva(newpage), page2kva(page),
 				       PGSIZE);
-				//kprintf("COW!\n\r");
+				//kprintf("COW!\n");
 				page = newpage, newpage = NULL;
 			}
 		}

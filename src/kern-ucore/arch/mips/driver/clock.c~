@@ -1,7 +1,7 @@
 #include <arch.h>
 #include <trap.h>
 #include <stdio.h>
-//#include <picirq.h>
+#include <picirq.h>
 #include <sched.h>
 #include <asm/mipsregs.h>
 
@@ -29,6 +29,6 @@ int clock_int_handler(void *data)
 void clock_init(void)
 {
 	reload_timer();
-	//pic_enable(TIMER0_IRQ);
+	pic_enable(TIMER0_IRQ);
 	kprintf("++setup timer interrupts\n");
 }

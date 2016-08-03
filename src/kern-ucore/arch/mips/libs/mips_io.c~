@@ -107,7 +107,7 @@ void PRINT_HEX(const char *str,int x)
 {
 	kprintf(str);
 	printhex((unsigned int)x);
-	kprintf("\n\r");
+	kprintf("\n");
 }
 /* kputchar - writes a single character to stdout */
 void kputchar(int c)

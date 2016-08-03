@@ -1,11 +1,14 @@
 2400+0 records in
 2400+0 records out
-1228800 bytes (1.2 MB) copied, 0.0106944 s, 115 MB/s
+1228800 bytes (1.2 MB) copied, 0.00962288 s, 128 MB/s
 sched.c: In function 'try_to_wakeup':
 sched.c:184:16: warning: assignment makes pointer from integer without a cast [enabled by default]
 init.c: In function 'kern_init':
 init.c:28:12: warning: initialization makes pointer from integer without a cast [enabled by default]
 syscall.c:347:5: warning: initialization from incompatible pointer type [enabled by default]
 syscall.c:347:5: warning: (near initialization for 'syscalls[242]') [enabled by default]
+trap.c: In function 'print_trapframe':
+trap.c:74:2: warning: passing argument 2 of 'PRINT_HEX' makes integer from pointer without a cast [enabled by default]
+/home/oslab/os_ucore_mips_m14k/src/kern-ucore/arch/mips/libs/mips_io.h:13:6: note: expected 'int' but argument is of type 'struct trapframe *'
 arch/mips/bootasm.S:24:21: warning: backslash and newline separated by space [enabled by default]
 mips-sde-elf-ld: warning: cannot find entry symbol __reset_vector; defaulting to 0000000080001000

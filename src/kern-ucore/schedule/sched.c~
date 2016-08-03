@@ -297,7 +297,7 @@ void run_timer_list(void)
 					assert(proc->wait_state &
 					       WT_INTERRUPTED);
 				} else {
-					warn("process %d's wait_state == 0.\n",
+					warn("process %d's wait_state == 0.\n\r",
 					     proc->pid);
 				}
 

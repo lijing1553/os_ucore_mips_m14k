@@ -419,7 +419,7 @@ int kernel_execve(const char *name, const char **argv, const char **kenvp)
 
 #define __KERNEL_EXECVE(name, path, ...) ({                         \
 const char *argv[] = {path, ##__VA_ARGS__, NULL};       \
-					 kprintf("kernel_execve: pid = %d, name = \"%s\".\n",    \
+					 kprintf("kernel_execve: pid = %d, name = \"%s\".\n\r",    \
 							 current->pid, name);                            \
 					 kernel_execve(name, argv);                              \
 })

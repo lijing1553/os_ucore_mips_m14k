@@ -259,7 +259,7 @@ static void trap_dispatch(struct trapframe *tf)
 		print_trapframe(tf);
 		uint32_t *addr = (uint32_t *) (tf->tf_epc);
 		for (i = 0; i < 10; ++i, addr++)
-			kprintf("[%x:%x]\n", addr, *addr);
+			kprintf("[%x:%x]\n\r", addr, *addr);
 
 		panic("hey man! Do NOT use that insn! insn=%x",
 		      *(uint32_t *) (tf->tf_epc));

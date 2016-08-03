@@ -310,21 +310,21 @@ static void check_boot_pgdir(void)
 	struct Page *p;
 	p = alloc_page();
 	*(int *)(page2kva(p) + 0x100) = 0x1234;
-	kprintf("page2kva(p):0x%08x",page2kva(p));
+	/*kprintf("page2kva(p):0x%08x",page2kva(p));
 	kprintf("\n\r");
-	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));*/
 
 	assert(page_insert(boot_pgdir, p, 0x100, PTE_W) == 0);
 	assert(page_ref(p) == 1);
-	kprintf("page2kva(p):0x%08x",page2kva(p));
+	/*kprintf("page2kva(p):0x%08x",page2kva(p));
 	kprintf("\n\r");
 	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
 	kprintf("\n\r");
-	kprintf("*(int*)(0x100):0x%08x",*(int*)(0x100));
+	kprintf("*(int*)(0x100):0x%08x",*(int*)(0x100));*/
 	assert(page_insert(boot_pgdir, p, 0x100 + PGSIZE, PTE_W) == 0);
 	assert(page_ref(p) == 2);
 
-	kprintf("\n\rHERE\n\r");
+	/*kprintf("\n\rHERE\n\r");
 	kprintf("page2kva(p):0x%08x",page2kva(p));
 	kprintf("\n\r");
 	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
@@ -334,24 +334,24 @@ static void check_boot_pgdir(void)
 	
 	kprintf("page2kva(p):0x%08x",page2kva(p));
 	kprintf("\n\r");
-	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
+	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));*/
 	assert(*(int *)0x100 == 0x1234);
 	const char *str = "ucore: Hello world!!";
-	strcpy((void *)0x100, str);
+	/*strcpy((void *)0x100, str);
 	kprintf("\n\r*(int*)(0x100):0x%08x",*(int*)(0x100));
-	kprintf("\n\r");
+	kprintf("\n\r");*/
 	assert(strcmp((void *)0x100, (void *)(0x100 + PGSIZE)) == 0);
 	
-	kprintf("page2kva(p):0x%08x",page2kva(p));
+	/*kprintf("page2kva(p):0x%08x",page2kva(p));
 	kprintf("\n\r");
 	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
-	kprintf("\n\r");
+	kprintf("\n\r");*/
 	*(char *)(page2kva(p) + 0x100) = '\0';
 	assert(strlen((const char *)0x100) == 0);
-	kprintf("\n\r*(int*)(0x100):0x%08x",*(int*)(0x100));
+	/*kprintf("\n\r*(int*)(0x100):0x%08x",*(int*)(0x100));
 	kprintf("\n\r");
 	kprintf("*(int*)(page2kva(p)+0x100):0x%08x",*(int*)(page2kva(p)+0x100));
-	kprintf("\n\r");
+	kprintf("\n\r");*/
 	free_page(p);
 	free_page(pa2page(PDE_ADDR(boot_pgdir[0])));
 	boot_pgdir[0] = 0;
@@ -415,7 +415,7 @@ get_pgtable_items(size_t left, size_t right, size_t start, uintptr_t * table,
 void print_pgdir(void)
 {
 	size_t left, right = 0, perm;
-	kprintf("---------------- PAGE Directory BEGIN ----------------\n");
+	kprintf("---------------- PAGE Directory BEGIN ----------------\n\r");
 /* SZY comments: why this shows empty in QEMU emulator? */
 	while ((perm =
 		get_pgtable_items(0, NPDEENTRY, right, current_pgdir, &left,
@@ -458,7 +458,7 @@ void print_pgdir(void)
 			}
 		}
 	}
-	kprintf("---------------- PAGE Directory END ------------------\n");
+	kprintf("---------------- PAGE Directory END ------------------\n\r");
 }
 
 //added by HHL

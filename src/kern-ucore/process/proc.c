@@ -180,7 +180,7 @@ void proc_run(struct proc_struct *proc)
 	if (proc != current) {
 		bool intr_flag;
 		struct proc_struct *prev = current, *next = proc;
-		// kprintf("(%d) => %d\n", lapic_id, next->pid);
+		// kprintf("(%d) => %d\n\r", lapic_id, next->pid);
 		local_intr_save(intr_flag);
 		{
 			pls_write(current, proc);
@@ -649,10 +649,10 @@ bad_fork_cleanup_proc:
 static int __do_exit(void)
 {
 	if (current == idleproc) {
-		panic("idleproc exit.\n");
+		panic("idleproc exit.\n\r");
 	}
 	if (current == initproc) {
-		panic("initproc exit.\n");
+		panic("initproc exit.\n\r");
 	}
 
 	struct mm_struct *mm = current->mm;
@@ -717,7 +717,7 @@ static int __do_exit(void)
 	local_intr_restore(intr_flag);
 
 	schedule();
-	panic("__do_exit will not return!! %d %d.\n", current->pid,
+	panic("__do_exit will not return!! %d %d.\n\r", current->pid,
 	      current->exit_code);
 }
 
@@ -932,7 +932,7 @@ static int load_icode(int fd, int argc, char **kargv, int envc, char **kenvp)
 		}
 
 		if ((ret = map_ph(fd, ph, mm, &bias, 0)) != 0) {
-			kprintf("load address: 0x%08x size: %d\n", ph->p_va,
+			kprintf("load address: 0x%08x size: %d\n\r", ph->p_va,
 				ph->p_memsz);
 			goto bad_cleanup_mmap;
 		}
@@ -1218,13 +1218,13 @@ int do_execve(const char *filename, const char **argv, const char **envp)
 	}
 #if 0
 	int i;
-	kprintf("## fn %s\n", filename);
-	kprintf("## argc %d\n", argc);
+	kprintf("## fn %s\n\r", filename);
+	kprintf("## argc %d\n\r", argc);
 	for (i = 0; i < argc; i++)
-		kprintf("## %08x %s\n", kargv[i], kargv[i]);
-	kprintf("## envc %d\n", envc);
+		kprintf("## %08x %s\n\r", kargv[i], kargv[i]);
+	kprintf("## envc %d\n\r", envc);
 	for (i = 0; i < envc; i++)
-		kprintf("## %08x %s\n", kenvp[i], kenvp[i]);
+		kprintf("## %08x %s\n\r", kenvp[i], kenvp[i]);
 #endif
 	//path = argv[0];
 	//copy_from_user (mm, &path, argv, sizeof (char*), 0);
@@ -1463,7 +1463,7 @@ repeat:
 
 found:
 	if (proc == idleproc || proc == initproc) {
-		panic("wait idleproc or initproc.\n");
+		panic("wait idleproc or initproc.\n\r");
 	}
 	int exit_code = proc->exit_code;
 	int return_pid = proc->pid;
@@ -1520,7 +1520,7 @@ int do_brk(uintptr_t * brk_store)
 {
 	struct mm_struct *mm = current->mm;
 	if (mm == NULL) {
-		panic("kernel thread call sys_brk!!.\n");
+		panic("kernel thread call sys_brk!!.\n\r");
 	}
 	if (brk_store == NULL) {
 		//     return -E_INVAL;
@@ -1570,7 +1570,7 @@ int do_linux_brk(uintptr_t brk)
 	uint32_t min_brk;
 
 	if (!mm) {
-		panic("kernel thread call sys_brk!!.\n");
+		panic("kernel thread call sys_brk!!.\n\r");
 	}
 
 	lock_mm(mm);
@@ -1691,7 +1691,7 @@ int do_linux_sleep(const struct linux_timespec __user * req,
 #else
 	unsigned long j = msec / 10;
 #endif
-	//kprintf("do_linux_sleep: sleep %d msec, %d jiffies\n", msec, j);
+	//kprintf("do_linux_sleep: sleep %d msec, %d jiffies\n\r", msec, j);
 	int ret = do_sleep(j);
 	if (rem) {
 		memset(&kts, 0, sizeof(struct linux_timespec));
@@ -1710,7 +1710,7 @@ __do_linux_mmap(uintptr_t __user * addr_store, size_t len, uint32_t mmap_flags)
 {
 	struct mm_struct *mm = current->mm;
 	if (mm == NULL) {
-		panic("kernel thread call mmap!!.\n");
+		panic("kernel thread call mmap!!.\n\r");
 	}
 	if (addr_store == NULL || len == 0) {
 		return -E_INVAL;
@@ -1753,7 +1753,7 @@ int do_mmap(uintptr_t __user * addr_store, size_t len, uint32_t mmap_flags)
 {
 	struct mm_struct *mm = current->mm;
 	if (mm == NULL) {
-		panic("kernel thread call mmap!!.\n");
+		panic("kernel thread call mmap!!.\n\r");
 	}
 	if (addr_store == NULL || len == 0) {
 		return -E_INVAL;
@@ -1797,7 +1797,7 @@ int do_munmap(uintptr_t addr, size_t len)
 {
 	struct mm_struct *mm = current->mm;
 	if (mm == NULL) {
-		panic("kernel thread call munmap!!.\n");
+		panic("kernel thread call munmap!!.\n\r");
 	}
 	if (len == 0) {
 		return -E_INVAL;
@@ -1894,7 +1894,7 @@ int do_shmem(uintptr_t * addr_store, size_t len, uint32_t mmap_flags)
 {
 	struct mm_struct *mm = current->mm;
 	if (mm == NULL) {
-		panic("kernel thread call mmap!!.\n");
+		panic("kernel thread call mmap!!.\n\r");
 	}
 	if (addr_store == NULL || len == 0) {
 		return -E_INVAL;
@@ -1943,7 +1943,7 @@ out_unlock:
 #define __KERNEL_EXECVE(name, path, ...) ({                         \
             const char *argv[] = {path, ##__VA_ARGS__, NULL};       \
             const char *envp[] = {"PATH=/bin/", NULL};              \
-            kprintf("kernel_execve: pid = %d, name = \"%s\".\n",    \
+            kprintf("kernel_execve: pid = %d, name = \"%s\".\n\r",    \
                     current->pid, name);                            \
             kernel_execve(path, argv, envp);                              \
         })
@@ -1971,7 +1971,7 @@ static int user_main(void *arg)
 #else
 	__KERNEL_EXECVE("/bin/sh", "/bin/sh");
 #endif
-	kprintf("user_main execve failed, no /bin/sh?.\n");
+	kprintf("user_main execve failed, no /bin/sh?.\n\r");
 }
 
 // init_main - the second kernel thread used to create kswapd_main & user_main kernel threads
@@ -1979,13 +1979,13 @@ static int init_main(void *arg)
 {
 	int ret;
 #ifdef DEBUG_PROCESS
-	kprintf("enter vfs_set_bootfs\n");
+	kprintf("enter vfs_set_bootfs\n\r");
 #endif
 	if ((ret = vfs_set_bootfs("disk0:")) != 0) {
-		panic("set boot fs failed: %e.\n", ret);
+		panic("set boot fs failed: %e.\n\r", ret);
 	}
 #ifdef DEBUG_PROCESS
-	kprintf("exit vfs_set_bootfs\n");
+	kprintf("exit vfs_set_bootfs\n\r");
 #endif
 	size_t nr_used_pages_store = nr_used_pages();
 	size_t slab_allocated_store = slab_allocated();
@@ -1993,14 +1993,14 @@ static int init_main(void *arg)
 	unsigned int nr_process_store = nr_process;
 
 #ifdef DEBUG_PROCESS
-	kprintf("create thread\n");
+	kprintf("create thread\n\r");
 #endif
 	int pid = ucore_kernel_thread(user_main, NULL, 0);
 	if (pid <= 0) {
-		panic("create user_main failed.\n");
+		panic("create user_main failed.\n\r");
 	}
 #ifdef DEBUG_PROCESS
-	kprintf("sche thread\n");
+	kprintf("sche thread\n\r");
 #endif
 	while (do_wait(0, NULL) == 0) {
 		if (nr_process_store == nr_process) {
@@ -2022,7 +2022,7 @@ static int init_main(void *arg)
 	mbox_cleanup();
 	fs_cleanup();
 
-	kprintf("all user-mode processes have quit.\n");
+	kprintf("all user-mode processes have quit.\n\r");
 #ifdef UCONFIG_SWAP
 	assert(initproc->cptr == kswapd && initproc->yptr == NULL
 	       && initproc->optr == NULL);
@@ -2034,7 +2034,7 @@ static int init_main(void *arg)
 #endif
 	assert(nr_used_pages_store == nr_used_pages());
 	assert(slab_allocated_store == slab_allocated());
-	kprintf("init check memory pass.\n");
+	kprintf("init check memory pass.\n\r");
 	return 0;
 }
 
