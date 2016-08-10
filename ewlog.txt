@@ -1,6 +1,6 @@
 2400+0 records in
 2400+0 records out
-1228800 bytes (1.2 MB) copied, 0.00962013 s, 128 MB/s
+1228800 bytes (1.2 MB) copied, 0.0105543 s, 116 MB/s
 sched.c: In function 'try_to_wakeup':
 sched.c:184:16: warning: assignment makes pointer from integer without a cast [enabled by default]
 init.c: In function 'kern_init':
